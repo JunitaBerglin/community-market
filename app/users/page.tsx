@@ -1,13 +1,22 @@
-import Link from "next/link";
-import React from "react";
+import { mockUsers } from "@/components/app-sidebar";
 
-const UsersPage = () => {
-  return (
-    <div>
-      <h1>Users Page</h1>
-      <Link href="/">Home</Link>
-    </div>
-  );
+const fetchConnectedUsers = () => {
+  return mockUsers;
 };
 
-export default UsersPage;
+export default async function UsersPage() {
+  const connectedUsers = await fetchConnectedUsers();
+
+  return (
+    <div className="p-4">
+      <h1 className="text-2xl font-bold">Connected Users</h1>
+      <ul className="mt-4">
+        {connectedUsers.map((user) => (
+          <li key={user.id} className="py-2 border-b">
+            {user.name}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
