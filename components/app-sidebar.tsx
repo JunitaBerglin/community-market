@@ -9,33 +9,24 @@ import {
 } from "@/components/ui/sidebar";
 import Link from "next/link";
 
-export type User = {
-  id: number;
-  name: string;
-};
-
-export const mockUsers: User[] = [
-  { id: 1, name: "Junita" },
-  { id: 2, name: "Alex" },
-  { id: 3, name: "Konrad" },
-  { id: 4, name: "Julia" },
-];
-
-export const AppSidebar = ({ mockUsers }: { mockUsers: User[] }) => {
+export const AppSidebar = () => {
   return (
-    <Sidebar>
-      <SidebarContent>
-        <SidebarHeader>Community</SidebarHeader>
-        <SidebarMenu>
-          {mockUsers.map((user) => (
-            <SidebarMenuItem key={user.id}>
-              <Link href={`/users/${user.id}`} className="text-sm">
-                {user.name}
-              </Link>
+    <>
+      <SidebarTrigger defaultChecked />
+      <Sidebar>
+        <SidebarTrigger className="p-7" />
+        <SidebarContent>
+          <SidebarHeader className="text-3xl">Community</SidebarHeader>
+          <SidebarMenu>
+            <SidebarMenuItem>
+              <Link href="/users">Users</Link>
             </SidebarMenuItem>
-          ))}
-        </SidebarMenu>
-      </SidebarContent>
-    </Sidebar>
+            <SidebarMenuItem>
+              <Link href="/login">Login</Link>
+            </SidebarMenuItem>
+          </SidebarMenu>
+        </SidebarContent>
+      </Sidebar>
+    </>
   );
 };
