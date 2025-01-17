@@ -1,4 +1,4 @@
-import { mockUsers } from "@/components/app-sidebar";
+import { mockUsers } from "../layout";
 
 const fetchConnectedUsers = () => {
   return mockUsers;
