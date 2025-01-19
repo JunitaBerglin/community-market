@@ -14,7 +14,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useActionState } from "react";
 import { useForm } from "react-hook-form";
-import { signUpAction } from "@/app/action";
+import { signUpAction } from "@/app/actions";
 
 const formSchema = z.object({
   username: z.string().min(2, {
