@@ -1,10 +1,10 @@
 import { Button } from "@/components/ui/button";
 import { SidebarHeader } from "@/components/ui/sidebar";
-import { getAllUsers } from "@/repository";
 import Link from "next/link";
+import { getAllUsersAction } from "../actionservice";
 
 export default async function UsersPage() {
-  const connectedUsers = await getAllUsers();
+  const connectedUsers = await getAllUsersAction();
 
   return (
     <div className="pt-40">
@@ -13,8 +13,8 @@ export default async function UsersPage() {
       </SidebarHeader>
       <ul className="mt-4">
         {connectedUsers.map((user) => (
-          <li key={user.id} className="py-2 border-b">
-            {user.name}
+          <li key={user.userId} className="py-2 border-b">
+            {user.userName}
             <Button>
               <Link href="/products"> See users marketplace</Link>
             </Button>

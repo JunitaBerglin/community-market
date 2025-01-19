@@ -1,21 +1,27 @@
 import { SidebarHeader } from "@/components/ui/sidebar";
-import { getAllUsers } from "@/repository";
+import { Product, User } from "@/types/types";
+import { getAllProductsAction } from "../actionservice";
+import { ProductCard } from "@/components/ui/product-card";
 
 export default async function ExplorePage() {
-  const connectedUsers = await getAllUsers();
+  const products: Product[] = await getAllProductsAction();
 
   return (
     <div className="pt-40">
       <SidebarHeader className="text-3xl">
         Products awailable in your community
       </SidebarHeader>
-      <ul className="mt-4">
-        {connectedUsers.map((user) => (
-          <li key={user.id} className="py-2 border-b">
-            {user.products.map((product) => product.title).join(", ")}
-          </li>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-20">
+        {products.map((product: Product) => (
+          <ProductCard
+            key={product.id}
+            productname={product.productname}
+            description={product.description}
+            price={product.price}
+            imageUrl={product.imageUrl}
+          />
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
