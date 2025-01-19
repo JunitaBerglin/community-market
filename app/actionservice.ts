@@ -1,9 +1,9 @@
 "use server";
 import { cookies } from "next/headers";
-import { db } from "@/src";
-import { productsTable, usersTable } from "@/src/db/schema";
 import { revalidatePath } from "next/cache";
 import { Product, User } from "@/types/types";
+import { productsTable, usersTable } from "@/db/schema";
+import { db } from "@/db/db";
 
 export type SignUpFormValues = {
   userName: string;
@@ -60,14 +60,14 @@ export async function signUpAction(previousState: unknown, formData: FormData) {
 export async function signInAction(previousState: unknown, formData: FormData) {
   console.log("User signed in ==>>>", formData);
 
-  const username = formData.get("username") as string;
+  const userName = formData.get("username") as string;
   const email = formData.get("email") as string;
   const password = formData.get("password") as string;
 
   try {
     const result = await db
       .insert(usersTable)
-      .values({ username, email, password })
+      .values({ userName, email, password })
       .returning({ userId: usersTable.userId });
 
     const userId = result[0]?.userId;
