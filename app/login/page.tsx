@@ -1,9 +1,10 @@
-import { LoginForm } from "@/components/login-form";
+import { LoginForm } from "@/components/forms/login-form";
+import { SidebarHeader } from "@/components/ui/sidebar";
 
 function Login() {
   return (
-    <div>
-      <h1>Login</h1>
+    <div className="pt-40">
+      <SidebarHeader className="text-3xl">Welcome back!</SidebarHeader>
       <LoginForm />
     </div>
   );
