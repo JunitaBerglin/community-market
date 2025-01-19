@@ -15,34 +15,34 @@ const ProductCard: React.FC<CardProps> = ({
   imageUrl,
 }) => {
   return (
-    <div className="flex flex-col">
-      <div className="relative">
-        <img className="hidden lg:block" src={imageUrl} alt={name} />
-        <img className="hidden sm:block lg:hidden" src={imageUrl} alt={name} />
-        <img className="sm:hidden" src={imageUrl} alt={name} />
+    <div className="flex flex-col border rounded-lg shadow-md overflow-hidden">
+      <div className="relative w-full h-48 sm:h-64 md:h-72 lg:h-80">
+        <img className="object-cover w-full h-full" src={imageUrl} alt={name} />
       </div>
-      <div className="mt-6 flex justify-between items-center">
-        <div className="flex justify-center items-center">
-          <p className="tracking-tight text-2xl font-semibold leading-6 text-gray-800 dark:text-white">
+
+      <div className="p-4 flex flex-col justify-between flex-1">
+        <div>
+          <h2 className="text-lg md:text-xl font-semibold text-gray-800 dark:text-white">
             {name}
+          </h2>
+          <p className="mt-2 text-sm md:text-base text-gray-600 dark:text-gray-300">
+            {description}
           </p>
         </div>
-      </div>
-      <div className="flex flex-col justify-start items-start mt-4">
-        <p className="tracking-tight text-base font-medium leading-4 text-gray-800 dark:text-white">
-          {description}
-        </p>
-        <p className="tracking-tight text-base font-medium leading-4 text-gray-800 dark:text-white mt-4">
-          ${price}
-        </p>
-      </div>
-      <div className="flex justify-between items-center mt-6 space-x-4">
-        <Button className="focus:outline-none focus:ring-gray-800 focus:ring-offset-2 focus:ring-2 text-gray-800 text-white w-full tracking-tight py-4 text-lg leading-4 hover:bg-gray-300 hover:text-gray-800 dark:bg-transparent dark:border-white dark:hover:bg-gray-800 bg-white border border-gray-800 dark:hover:text-white">
-          Read More
-        </Button>
-        <Button className="focus:outline-none focus:ring-gray-800 focus:ring-offset-2 focus:ring-2 text-white w-full tracking-tight py-4 text-lg leading-4 hover:bg-black bg-gray-800 border border-gray-800 dark:hover:bg-gray-700 dark:hover:text-white">
-          Purchase
-        </Button>
+
+        <div className="mt-4">
+          <p className="text-lg font-bold text-gray-800 dark:text-white">
+            ${price}
+          </p>
+          <div className="mt-4 flex flex-col sm:flex-row gap-2">
+            <Button className="w-full sm:w-auto text-sm py-2 px-4 bg-gray-200 hover:bg-gray-300 text-gray-800">
+              Read More
+            </Button>
+            <Button className="w-full sm:w-auto text-sm py-2 px-4 bg-gray-800 hover:bg-black text-white">
+              Purchase
+            </Button>
+          </div>
+        </div>
       </div>
     </div>
   );

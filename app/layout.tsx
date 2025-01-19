@@ -21,7 +21,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <SidebarProvider>
           <AppSidebar />
-          <main className="ml-[var(--sidebar-width)]">{children}</main>
+          <main className="ml-2">{children}</main>
         </SidebarProvider>
       </body>
     </html>
