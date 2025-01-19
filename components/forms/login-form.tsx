@@ -13,6 +13,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useActionState } from "react";
+import { signInAction } from "@/app/actionservice";
 
 const formSchema = z.object({
   username: z.string().min(2, {
@@ -21,7 +23,8 @@ const formSchema = z.object({
 });
 
 function LoginForm() {
-  // 1. Define your form.
+  const [error, action, isPending] = useActionState(signInAction, null);
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -29,15 +32,9 @@ function LoginForm() {
     },
   });
 
-  // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values);
-  }
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+      <form action={action} className="space-y-8">
         <FormField
           control={form.control}
           name="username"
@@ -54,7 +51,8 @@ function LoginForm() {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button disabled={isPending}>Login</Button>
+        {isPending && <FormMessage title="info">Loading...</FormMessage>}
       </form>
     </Form>
   );

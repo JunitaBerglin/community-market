@@ -16,13 +16,21 @@ export const AppSidebar = () => {
       <Sidebar>
         <SidebarTrigger className="p-7" />
         <SidebarContent>
-          <SidebarHeader className="text-3xl">Community</SidebarHeader>
-          <SidebarMenu>
+          <SidebarHeader className="text-3xl pt-8">
+            <Link href="/">Community</Link>
+          </SidebarHeader>
+          <SidebarMenu className="gap-4">
             <SidebarMenuItem>
               <Link href="/users">Users</Link>
             </SidebarMenuItem>
             <SidebarMenuItem>
               <Link href="/login">Login</Link>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <Link href="/signup">Sign up</Link>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <Link href="/explore">Explore</Link>
             </SidebarMenuItem>
           </SidebarMenu>
         </SidebarContent>
