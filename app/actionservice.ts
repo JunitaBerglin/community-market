@@ -13,16 +13,12 @@ export type SignInFormValues = {
   password: string;
 };
 
-export async function signUpAction(
-  error: string,
-  previousState: SignUpFormValues,
-  formData: SignUpFormValues
-) {
+export async function signUpAction(previousState: unknown, formData: FormData) {
   await new Promise((resolve) => setTimeout(resolve, 1000));
 
   console.log("User signed up ==>>>", formData);
-  console.log("Error ===>>>", error);
-  console.log("Previous state ===>>>", previousState);
+  // console.log("Error ===>>>", error);
+  // console.log("Previous state ===>>>", previousState);
   try {
     console.log("inside my try, inside my signUpAction!! ==>>>", formData);
     // const content = formData.get("content") as string;
