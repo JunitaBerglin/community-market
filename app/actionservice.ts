@@ -1,5 +1,6 @@
 "use server";
-
+import { db } from "@/src";
+import { usersTable } from "@/src/db/schema";
 import { revalidatePath } from "next/cache";
 
 export type SignUpFormValues = {
@@ -14,39 +15,28 @@ export type SignInFormValues = {
 };
 
 export async function signUpAction(previousState: unknown, formData: FormData) {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-
   console.log("User signed up ==>>>", formData);
-  // console.log("Error ===>>>", error);
-  // console.log("Previous state ===>>>", previousState);
+  const username = formData.get("username") as string;
+  const email = formData.get("email") as string;
+  const password = formData.get("password") as string;
   try {
-    console.log("inside my try, inside my signUpAction!! ==>>>", formData);
-    // const content = formData.get("content") as string;
-    // await prisma.task.create({ data: { content } });
+    await db.insert(usersTable).values({ username, email, password });
   } catch (e) {
-    console.error("Sign-up failed:", e);
+    console.error("Sign up failed:", e);
     return "An error occurred while signing up.";
   }
   revalidatePath("/");
 }
 
-export async function signInAction(
-  error: string,
-  previousState: SignInFormValues,
-  formData: SignInFormValues
-) {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-
+export async function signInAction(previousState: unknown, formData: FormData) {
   console.log("User signed in ==>>>", formData);
-  console.log("Error ===>>>", error);
-
-  console.log("Previous state ===>>>", previousState);
+  const username = formData.get("username") as string;
+  const email = formData.get("email") as string;
+  const password = formData.get("password") as string;
   try {
-    console.log("inside my try, inside my signInAction!! ==>>>", formData);
-    // const content = formData.get("content") as string;
-    // await prisma.task.create({ data: { content } });
+    await db.insert(usersTable).values({ username, email, password });
   } catch (e) {
-    console.error("Sign-in failed:", e);
+    console.error("Sign in failed:", e);
     return "An error occurred while signing in.";
   }
   revalidatePath("/");

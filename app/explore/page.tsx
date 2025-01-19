@@ -1,12 +1,8 @@
 import { SidebarHeader } from "@/components/ui/sidebar";
-import { mockUsers } from "../layout";
-
-const fetchConnectedUsers = () => {
-  return mockUsers;
-};
+import { getAllUsers } from "@/repository";
 
 export default async function ExplorePage() {
-  const connectedUsers = await fetchConnectedUsers();
+  const connectedUsers = await getAllUsers();
 
   return (
     <div className="pt-40">
