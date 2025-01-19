@@ -1,6 +1,6 @@
-import { db } from "@/src";
-import { usersTable, productsTable } from "@/src/db/schema";
-import { Product, User } from "@/types/types";
+import { db } from "@/db/db";
+import { productsTable, usersTable } from "@/db/schema";
+import { Product } from "@/types/types";
 
 const mockUsers = [
   {
@@ -36,7 +36,7 @@ const mockItems: Product[] = [
     description: "Beige brown, 42 size",
     price: "1000",
     imageUrl: "https://i.ibb.co/SsmkhPq/Rectangle-23.png",
-    userId: 1,
+    userId: "1",
   },
   {
     id: 2,
@@ -44,7 +44,7 @@ const mockItems: Product[] = [
     description: "Modern watch with sleek design",
     price: "500",
     imageUrl: "https://i.ibb.co/WVySXBL/Rectangle-24.png",
-    userId: 2,
+    userId: "2",
   },
   {
     id: 3,
@@ -52,7 +52,7 @@ const mockItems: Product[] = [
     description: "Comfortable sneakers, 42 size",
     price: "150",
     imageUrl: "https://i.ibb.co/JqD4MwR/Rectangle-5.png",
-    userId: 3,
+    userId: "3",
   },
 ];
 

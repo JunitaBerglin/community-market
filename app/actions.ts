@@ -4,6 +4,7 @@ import { revalidatePath } from "next/cache";
 import { Product, User } from "@/types/types";
 import { productsTable, usersTable } from "@/db/schema";
 import { db } from "@/db/db";
+import { eq } from "drizzle-orm";
 
 export type SignUpFormValues = {
   userName: string;
@@ -16,7 +17,7 @@ export type SignInFormValues = {
   password: string;
 };
 
-export async function getAllProductsAction(): Promise<Product[]> {
+export async function getAllProductsAction() {
   return await db.select().from(productsTable);
 }
 
@@ -24,13 +25,12 @@ export async function getAllUsersAction(): Promise<User[]> {
   return await db.select().from(usersTable);
 }
 
-export async function getUserByIdAction(userId: number): Promise<User | null> {
+export async function getUserByIdAction(userId: number) {
   const user = await db
     .select()
     .from(usersTable)
-    .where(usersTable.userId.eq(userId))
-    .first();
-  return user || null;
+    .where(eq(usersTable.userId, userId));
+  return user[0] || null;
 }
 
 export async function signUpAction(previousState: unknown, formData: FormData) {
@@ -47,7 +47,7 @@ export async function signUpAction(previousState: unknown, formData: FormData) {
     const userId = result[0]?.id;
     if (!userId) throw new Error("Failed to retrieve user ID.");
 
-    cookies().set("userId", String(userId));
+    // cookies().set("userId", String(userId));
     console.log("User signed up successfully!");
   } catch (error) {
     console.error("Sign up failed:", error);
@@ -97,12 +97,11 @@ export async function addProductAction(
   const description = formData.get("description") as string;
   const price = formData.get("price") as string;
   const imageUrl = formData.get("imageUrl") as string;
-  const userId = 1;
 
   try {
     const result = await db
-      .insert(usersTable)
-      .values({ productname, description, price, imageUrl, userId });
+      .insert(productsTable)
+      .values({ productname, description, price, imageUrl, userId: "1" });
 
     console.log("Product added successfully!");
   } catch (e) {

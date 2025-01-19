@@ -14,7 +14,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { useActionState } from "react";
 import { useForm } from "react-hook-form";
-import { addProductAction } from "@/app/actionservice";
+import { addProductAction } from "@/app/action";
 
 const formSchema = z.object({
   productname: z.string().min(2, {

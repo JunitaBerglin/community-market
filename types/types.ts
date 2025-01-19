@@ -7,8 +7,8 @@ export type User = {
 export type Product = {
   id: number;
   productname: string;
-  description: string | null;
+  description: string;
   price: string;
   imageUrl: string | null;
-  userId: number;
+  userId: string;
 };

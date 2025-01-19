@@ -5,7 +5,7 @@ interface CardProps {
   productname: string;
   description: string;
   price: string;
-  imageUrl: string;
+  imageUrl: string | null;
 }
 
 const ProductCard: React.FC<CardProps> = ({
@@ -19,7 +19,7 @@ const ProductCard: React.FC<CardProps> = ({
       <div className="relative w-full h-48 sm:h-64 md:h-72 lg:h-80">
         <img
           className="object-cover w-full h-full"
-          src={imageUrl}
+          src={imageUrl || ""}
           alt={productname}
         />
       </div>

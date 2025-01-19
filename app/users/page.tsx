@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { SidebarHeader } from "@/components/ui/sidebar";
 import Link from "next/link";
-import { getAllUsersAction } from "../actionservice";
+import { getAllUsersAction } from "../actions";
 
 export default async function UsersPage() {
   const connectedUsers = await getAllUsersAction();

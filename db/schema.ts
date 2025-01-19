@@ -10,7 +10,7 @@ export const usersTable = sqliteTable("users_table", {
 export const productsTable = sqliteTable("products_table", {
   id: int().primaryKey({ autoIncrement: true }),
   productname: text().notNull(),
-  description: text(),
+  description: text().notNull(),
   price: text().notNull(),
   imageUrl: text(),
   userId: text(),
