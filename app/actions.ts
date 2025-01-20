@@ -1,10 +1,11 @@
 "use server";
-import { cookies } from "next/headers";
+// import { cookies } from "next/headers";
 import { revalidatePath } from "next/cache";
 import { Product, User } from "@/types/types";
 import { productsTable, usersTable } from "@/db/schema";
 import { db } from "@/db/db";
 import { eq } from "drizzle-orm";
+import { seedDatabase } from "@/scripts/seeder";
 
 export type SignUpFormValues = {
   userName: string;
@@ -47,18 +48,19 @@ export async function signUpAction(previousState: unknown, formData: FormData) {
     const userId = result[0]?.id;
     if (!userId) throw new Error("Failed to retrieve user ID.");
 
-    // cookies().set("userId", String(userId));
     console.log("User signed up successfully!");
   } catch (error) {
     console.error("Sign up failed:", error);
     return "An error occurred while signing up.";
   }
 
+  // cookies().set("userId", String(userId));
   revalidatePath("/");
 }
 
 export async function signInAction(previousState: unknown, formData: FormData) {
   console.log("User signed in ==>>>", formData);
+  await seedDatabase();
 
   const userName = formData.get("username") as string;
   const email = formData.get("email") as string;
@@ -76,9 +78,7 @@ export async function signInAction(previousState: unknown, formData: FormData) {
       throw new Error("Failed to retrieve user ID.");
     }
 
-    (await cookies()).set("userId", String(userId));
-
-    console.log("User logged in, userId set in cookies.");
+    // (await cookies()).set("userId", String(userId));
   } catch (e) {
     console.error("Sign in failed:", e);
     return "An error occurred while signing in.";
