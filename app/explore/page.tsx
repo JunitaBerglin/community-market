@@ -9,7 +9,7 @@ export default async function ExplorePage() {
   return (
     <div className="pt-40">
       <SidebarHeader className="text-3xl">
-        Products awailable in your community
+        Products available in your community
       </SidebarHeader>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-20">
         {products.map((product) => (

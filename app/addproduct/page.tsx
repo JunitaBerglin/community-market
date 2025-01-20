@@ -3,7 +3,7 @@ import { SidebarHeader } from "@/components/ui/sidebar";
 
 function AddProduct() {
   return (
-    <div className="pt-40">
+    <div className="pt-20 pl-20">
       <SidebarHeader className="text-3xl">Add product</SidebarHeader>
       <AddProductForm />
     </div>
