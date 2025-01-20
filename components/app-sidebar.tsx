@@ -30,7 +30,12 @@ export const AppSidebar = () => {
               <Link href="/signup">Sign up</Link>
             </SidebarMenuItem>
             <SidebarMenuItem>
-              <Link href="/explore">Explore</Link>
+              <Link href="/addproduct">Add product</Link>
+            </SidebarMenuItem>
+            <SidebarMenuItem>
+              <Link href="/explore" className="text-lg">
+                Explore
+              </Link>
             </SidebarMenuItem>
           </SidebarMenu>
         </SidebarContent>

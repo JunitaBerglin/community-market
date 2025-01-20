@@ -3,9 +3,10 @@
 import { revalidatePath } from "next/cache";
 import { Product, User } from "@/types/types";
 import { productsTable, usersTable } from "@/db/schema";
-import { db } from "@/db/db";
+
 import { eq } from "drizzle-orm";
 import { seedDatabase } from "@/scripts/seeder";
+import { db } from "@/db/db";
 
 export type SignUpFormValues = {
   userName: string;
@@ -30,7 +31,7 @@ export async function getUserByIdAction(userId: number) {
   const user = await db
     .select()
     .from(usersTable)
-    .where(eq(usersTable.userId, userId));
+    .where(eq(usersTable.userId, userId.toString()));
   return user[0] || null;
 }
 
@@ -40,12 +41,13 @@ export async function signUpAction(previousState: unknown, formData: FormData) {
   const password = formData.get("password") as string;
 
   try {
-    const result = await db
-      .insert(usersTable)
-      .values({ userName, email, password })
-      .returning({ id: usersTable.userId });
+    const userId = crypto.randomUUID();
 
-    const userId = result[0]?.id;
+    await db
+      .insert(usersTable)
+      .values({ userId, userName, email, password })
+      .returning({ userId: usersTable.userId });
+
     if (!userId) throw new Error("Failed to retrieve user ID.");
 
     console.log("User signed up successfully!");
@@ -67,12 +69,12 @@ export async function signInAction(previousState: unknown, formData: FormData) {
   const password = formData.get("password") as string;
 
   try {
-    const result = await db
-      .insert(usersTable)
-      .values({ userName, email, password })
-      .returning({ userId: usersTable.userId });
+    const userId = crypto.randomUUID();
 
-    const userId = result[0]?.userId;
+    await db
+      .insert(usersTable)
+      .values({ userId, userName, email, password })
+      .returning({ userId: usersTable.userId });
 
     if (!userId) {
       throw new Error("Failed to retrieve user ID.");
@@ -99,9 +101,11 @@ export async function addProductAction(
   const imageUrl = formData.get("imageUrl") as string;
 
   try {
-    const result = await db
+    const id = crypto.randomUUID();
+
+    await db
       .insert(productsTable)
-      .values({ productname, description, price, imageUrl, userId: "1" });
+      .values({ id, productname, description, price, imageUrl, userId: "1" });
 
     console.log("Product added successfully!");
   } catch (e) {

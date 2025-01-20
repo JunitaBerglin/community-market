@@ -1,11 +1,11 @@
 export type User = {
-  userId: number;
+  userId: string;
   userName: string;
   products?: Product[];
 };
 
 export type Product = {
-  id: number;
+  id: string;
   productname: string;
   description: string;
   price: string;
